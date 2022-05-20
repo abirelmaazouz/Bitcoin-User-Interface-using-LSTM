@@ -35,21 +35,12 @@ np.random.seed(7)
 ##Getting real-time data
 
 #READ DATA
-df = pd.read_csv('https://www.cryptodatadownload.com/cdd/Binance_BTCUSDT_d.csv', index_col=None)
-df.head(3)
-
-len(df)
-
+df = pd.read_csv('https://www.cryptodatadownload.com/cdd/Binance_BTCUSDT_d.csv', index_col=None
 df.reset_index(inplace = True)
-df.head(3)
-
 df.rename(columns=df.iloc[0], inplace = True)
-df.head()
-
 df.drop(df.index[0], inplace=True)
 df.reset_index(drop=True, inplace = True)
-df.head(3)
-
+                 
 df = df.astype({"unix": float})
 df = df.astype({"open": float})
 df = df.astype({"high": float})
@@ -62,7 +53,6 @@ df = df.astype({"tradecount": float})
 print(df.dtypes)
 print("\n*** DF ***")
 df_copy = df.copy()
-df_copy.head(3)
 
 #CLEAN DATA TIMESTAMP
 
@@ -80,7 +70,6 @@ df_copy['week_day'] = df_copy.dt.apply(lambda x: x.weekday())
 df_copy.sort_values(by=['unix'],ascending=[True],inplace=True)
 
 df_work = df_copy[['dt','week_day','close','Volume BTC']]
-df_work.head()
 
 ##Data Splitting and Data normalization
 
@@ -102,28 +91,7 @@ X_test_trans = f_transformer.transform(X_test)
 
 y_train_trans = cnt_transformer.transform(y_train)
 y_test_trans = cnt_transformer.transform(y_test)
-
-print("*** SHAPES")
-print("X_train: %s, %s" % (X_train.shape[0],X_train.shape[1]))
-print("X_test: %s, %s" % (X_test.shape[0],X_test.shape[1]))
-print("y_train: %s, %s" % (y_train.shape[0],y_train.shape[1]))
-print("y_test: %s, %s" % (y_test.shape[0],y_test.shape[1]))
-
-print("\n*** MIN MAX")
-
-print("TRAIN COST: %d, %d" % (X_train.close.min(), X_train.close.max()))
-print("TEST COST: %d, %d" % (X_test.close.min(), X_test.close.max()))
-print("TRAIN VOL: %d, %d" % (X_train['Volume BTC'].min(), X_train['Volume BTC'].max()))
-print("TEST VOL: %d, %d" % (X_test['Volume BTC'].min(), X_test['Volume BTC'].max()))
-
-print("\n*** MIN MAX PARAMETER")
-print(f_transformer.data_min_)
-print(f_transformer.data_max_)
-print(cnt_transformer.data_min_)
-print(cnt_transformer.data_max_)
-
-X_train.head()
-
+                 
 #CREATE LAGGING DATASET FOR TIME-SERIES
 def create_dataset(X, y, time_steps=1):
     Xs, ys = [], []
@@ -137,10 +105,6 @@ time_steps = 1
 # reshape to [samples, time_steps, n_features]
 X_train_f, y_train_f = create_dataset(X_train_trans, y_train_trans, time_steps)
 X_test_f, y_test_f = create_dataset(X_test_trans, y_test_trans, time_steps)
-
-print("*** SHAPES")
-print(X_train_f.shape, y_train_f.shape)
-print(X_test_f.shape, y_test_f.shape)
 
 ##Building Bidirectional LSTM Model
 
@@ -159,10 +123,6 @@ model.compile(loss='mean_squared_error', optimizer='adam')
 model.summary()
 
 hist = model.fit(X_train_f[-seq_size:], y_train_f[-seq_size:], batch_size = 50, epochs = 25, shuffle=False, validation_split=0.1)
-
-X.head(2)
-
-X_train.head(2)
 
 ##Forecast
 
@@ -209,7 +169,6 @@ for i in range(0, future+1):
 
 time=pd.DataFrame(time_series_array)
 time=time.rename(columns={0:'date'})
-time.head(2)
 
 past_dates = pd.Series(df_work['dt'].tail(future))
 
@@ -219,7 +178,6 @@ past_week_dates.columns = ['Date']
 
 past_dates.reset_index(drop=True, inplace=True)
 past_dates = past_dates.iloc[0:(future-1)]
-past_dates
 
 future_dates = pd.Series(time['date']).tail(future+1)
 
@@ -232,23 +190,16 @@ historical.columns = ['Price']
 historical = historical.iloc[0:(future-1)]
 
 type1 = []
-
 for i in range(future):
   type1.append('Historical')
-
 type1 = pd.DataFrame(type1, columns = ['Type'])
 
 historical.reset_index(drop=True, inplace=True)
-
 historical = pd.concat([historical,type1], axis=1)
 
-historical.head(2)
-
 type2 = []
-
 for i in range(future):
   type2.append('Predicted')
-
 type2 = pd.DataFrame(type2, columns = ['Type'])
 
 rescaled_prediction = pd.DataFrame(cnt_transformer.inverse_transform(current_pred))
@@ -259,16 +210,10 @@ current_price.reset_index(drop=True, inplace=True)
 current_price.columns= ['Price']
 
 rescaled_prediction = pd.concat([current_price,rescaled_prediction], axis=0)
-
 rescaled_prediction_df = pd.concat([rescaled_prediction,type2], axis=1)
-
-rescaled_prediction.head(2)
-
+                 
 prices = pd.DataFrame()
-
 prices = pd.concat([historical, rescaled_prediction_df], axis=0)
-
-print(prices.head(2), prices.tail(2))
 
 plot_dates = pd.DataFrame(plot_dates)
 plot_dates.reset_index(drop=True, inplace=True)
@@ -282,8 +227,6 @@ prices.reset_index(drop=True, inplace=True)
 plotdf = pd.concat([plot_dates,prices], axis=1)
 plotdf.reset_index(drop=True, inplace=True)
 plotdf.set_index(['Date'], drop=True, inplace=True)
-
-plotdf.head()
 
 import seaborn as sns
 sns.lineplot(x='Date', y='Price', hue='Type', data= plotdf)
@@ -302,35 +245,22 @@ future=7
 #Creating Historical Price Dataframe
 
 h_week = pd.DataFrame(df_work['close'].tail(future))
-#h_week = h_week.iloc[0:(future-1)]
 h_week.columns = ['Price']
-h_week.head(2)
 
 type1 = []
-
 for i in range(future):
   type1.append('Historical')
-
 type1 = pd.DataFrame(type1, columns = ['Type'])
-type1.head(2)
 
 h_week.reset_index(drop=True, inplace=True)
-
 h_week = pd.concat([h_week,type1], axis=1)
-h_week.head(2)
-
 h_week = pd.concat([past_week_dates,h_week,], axis=1)
-h_week.head(2)
-
 h_week.set_index(['dt'], drop= True, inplace=True)
-
-h_week
 
 #Creating Predicted Price Dataframe
 
 rescaled_week = pd.DataFrame(cnt_transformer.inverse_transform(current_pred)[:7])
 rescaled_week.columns = ['Price']
-rescaled_week.head(2)
 
 current_price = pd.DataFrame(df_work['close'].tail(1))
 current_price.columns = ['Price']
@@ -340,22 +270,17 @@ rescaled_week = pd.concat([current_price,rescaled_week], axis=0)
 rescaled_week.reset_index(drop=True, inplace=True)
 
 type2 = []
-
 for i in range(future+1):
   type2.append('Predicted')
-
 type2 = pd.DataFrame(type2, columns = ['Type'])
-type2.head(2)
 
 p_week = pd.concat([rescaled_week,type2], axis=1)
-p_week.head(2)
 
 next_week_dates = pd.DataFrame(future_dates.iloc[:7])
 next_week_dates.columns = ['dt']
 
 p_week = pd.concat([next_week_dates,p_week], axis=1)
 p_week.set_index(['dt'], drop=True, inplace=True)
-p_week.head()
 
 #Plot Price Dataframes
 
