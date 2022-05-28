@@ -25,7 +25,8 @@ This project part requires Python and the following Python libraries installed:
 - tenseorflow
 - sklearn
 - joblib
-The source code is divided into multiple sections following the machine learning design pattern :
+
+\nThe source code is divided into multiple sections following the machine learning design pattern :
 
 Data Exploration
 Data cleaning,
@@ -39,34 +40,37 @@ We recommend you perform this on software (as pycharm) in order to have the GUI 
 
 Libraries create the interface:
 
-Tkinter
-from tkinter : messagebox
-customtkinter
-Libraries to diplay plots and pie charts:
+- Tkinter
+- from tkinter : messagebox
+- customtkinter
+\nLibraries to diplay plots and pie charts:
 
-matplotlib
-From matplotlip : FigureCanvasTkAgg, Figure, animation, style
-Library for the data :
+- matplotlib
+- From matplotlip : FigureCanvasTkAgg, Figure, animation, style
+\n Library for the data :
 
-yfiance
-Other useful libraries :
+- yfiance
 
-PIL
-datetime
-requests
-os
-pandas
-numpy
-BTCRYPTO Plateform is a graphical user interface constructed with Tkinter python. The design of the interface has been updated with the custom Tkinter library. The platform enables the potential bitcoin investor to have enough information about the bitcoin market and rather he should invest or not. A Twitter API is used to display the last bitcoin information tweets from the Twitter account @BTCTN.
+\n Other useful libraries :
+
+- PIL
+- datetime
+- requests
+- os
+- pandas
+- numpy
+
+\n BTCRYPTO Plateform is a graphical user interface constructed with Tkinter python. The design of the interface has been updated with the custom Tkinter library. The platform enables the potential bitcoin investor to have enough information about the bitcoin market and rather he should invest or not. A Twitter API is used to display the last bitcoin information tweets from the Twitter account @BTCTN.
 
 Frames of the interface :
 
-Start page (main page)
-User cryptocurrency portfolio visualisation
-Current Bitcoin market
-Bitcoin useful informations
-Twitter page, useful recent tweets about bitcoin
-Prediction prices for the 7 next days ( dowloawded from the machine learning part with a CSV file)
+- Start page (main page)
+- User cryptocurrency portfolio visualisation
+- Current Bitcoin market
+- Bitcoin useful informations
+- Twitter page, useful recent tweets about bitcoin
+- Prediction prices for the 7 next days ( dowloawded from the machine learning part with a CSV file)
+- - Prediction prices for the 6 next months ( dowloawded from the machine learning part with a CSV file)
 **RUN
 
 To run everything and have good results, you should first run the machine learning algorithm to download future bitcoin prices and then the BTCRYPTO platform algorithm to be able to display predictions on the graphical user interface.
