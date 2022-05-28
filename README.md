@@ -26,7 +26,7 @@ This project part requires Python and the following Python libraries installed:
 - sklearn
 - joblib
 
-\nThe source code is divided into multiple sections following the machine learning design pattern :
+The source code is divided into multiple sections following the machine learning design pattern :
 
 Data Exploration
 Data cleaning,
@@ -43,15 +43,17 @@ Libraries create the interface:
 - Tkinter
 - from tkinter : messagebox
 - customtkinter
-\nLibraries to diplay plots and pie charts:
+
+Libraries to diplay plots and pie charts:
 
 - matplotlib
 - From matplotlip : FigureCanvasTkAgg, Figure, animation, style
-\n Library for the data :
+
+Library for the data :
 
 - yfiance
 
-\n Other useful libraries :
+Other useful libraries :
 
 - PIL
 - datetime
@@ -60,7 +62,7 @@ Libraries create the interface:
 - pandas
 - numpy
 
-\n BTCRYPTO Plateform is a graphical user interface constructed with Tkinter python. The design of the interface has been updated with the custom Tkinter library. The platform enables the potential bitcoin investor to have enough information about the bitcoin market and rather he should invest or not. A Twitter API is used to display the last bitcoin information tweets from the Twitter account @BTCTN.
+BTCRYPTO Plateform is a graphical user interface constructed with Tkinter python. The design of the interface has been updated with the custom Tkinter library. The platform enables the potential bitcoin investor to have enough information about the bitcoin market and rather he should invest or not. A Twitter API is used to display the last bitcoin information tweets from the Twitter account @BTCTN.
 
 Frames of the interface :
 
