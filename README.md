@@ -15,16 +15,16 @@ Deep Recurrent Neural Network (LSTM) is a machine learning model often used in f
 
 This project part requires Python and the following Python libraries installed:
 
-Pandas
-matplotlib
-numpy
-seaborn
-datetime
-plotly.express
-time
-tenseorflow
-sklearn
-joblib
+- Pandas
+- matplotlib
+- numpy
+- seaborn
+- datetime
+- plotly.express
+- time
+- tenseorflow
+- sklearn
+- joblib
 The source code is divided into multiple sections following the machine learning design pattern :
 
 Data Exploration
